@@ -1,3 +1,6 @@
+import os.path
+import webbrowser
+
 from fpdf import FPDF
 
 class Bill:
@@ -44,8 +47,7 @@ class PdfReport:
         # Add icon
         pdf.image(name="android-system-home.png", w=30, h=30)
 
-
-        # Insert title
+        #Insert title
         pdf.set_font(family='Times', size=24, style='B')
         pdf.cell(w=0, h=80, txt="Flatmates Bill", border=1, align='C', ln=1)
         # Insert Period Label and Value
@@ -55,27 +57,38 @@ class PdfReport:
 
         # Insert name and the amount of the first flatmate
         pdf.set_font(family="Times", size=12)
-        pdf.cell(w=100, h=40, txt=flatmate1.name, border=1)
-        pdf.cell(w=150, h=40, txt=flatmate1_pay, border=1, ln=1)
+        pdf.cell(w=100, h=25, txt=flatmate1.name, border=1)
+        pdf.cell(w=150, h=25, txt=flatmate1_pay, border=1, ln=1)
 
         # Insert name and the amount of the second flatmate
         pdf.set_font(family="Times", size=12)
-        pdf.cell(w=100, h=40, txt=flatmate2.name, border=1)
-        pdf.cell(w=150, h=40, txt=flatmate2_pay, border=1, ln=1)
-
+        pdf.cell(w=100, h=25, txt=flatmate2.name, border=1)
+        pdf.cell(w=150, h=25, txt=flatmate2_pay, border=1, ln=1)
 
         pdf.output(self.filename)
+        webbrowser.open(self.filename)
 
 
-the_bill = Bill(amount=120, period="March 2021")
-john = Flatmate(name="John", days_in_house=20)
-marry = Flatmate(name="Marry", days_in_house=25)
+amount = float(input("Hey user, enter the bill amount"))
+period = input("What is the bill period? E.g. December 2020: ")
 
-print("John Pays: ", john.pays(bill=the_bill, flatmate2=marry))
-print("Marry Pays: ", marry.pays(bill=the_bill, flatmate2=john))
+name1  = input("What is your name? ")
+days_in_house1 = int(input(f"How many days did {name1} stay in house during the bill period? "))
+
+name2  = input("What is the name of the other flatmate? ")
+days_in_house2 = int(input(f"How many days did {name2} stay in house during the bill period? "))
+
+
+the_bill = Bill(amount=amount, period=period)
+flatmate1 = Flatmate(name=name1, days_in_house=days_in_house1)
+flatmate2 = Flatmate(name=name2, days_in_house=days_in_house2)
+
+print(f"{name1} Pays: ", flatmate1.pays(bill=the_bill, flatmate2=flatmate2))
+print(f"{name2} Pays: ", flatmate2.pays(bill=the_bill, flatmate2=flatmate1))
 
 pdf_report = PdfReport(filename="Report1.pdf")
-pdf_report.generate(flatmate1=john, flatmate2=marry, bill=the_bill)
+pdf_report.generate(flatmate1=flatmate1, flatmate2=flatmate2, bill=the_bill)
+
 
 
 
