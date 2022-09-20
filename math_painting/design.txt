@@ -1,0 +1,5 @@
+Title: Math painting
+description:
+Objects: Square(x, y, side, color, draw(canvas)),
+         Rectangle(x, y, width, height, color, draw(canvas)),
+         Canvas(width, height, color, make(imagepath)
