@@ -10,7 +10,7 @@ colors = { 'white': (255, 255, 255), 'black': (0, 0, 0) }
 canvas_color = input('Enter canvas color(white or black): ')
 
 # create a canvas with the user data
-my_canvas = Canvas(height=canvas_height, width=canvas_width, color=canvas_color)
+my_canvas = Canvas(height=canvas_height, width=canvas_width, color=colors[canvas_color])
 
 while True:
     shape_type = input('What do you like to draw? Enter quit to quite. ')
