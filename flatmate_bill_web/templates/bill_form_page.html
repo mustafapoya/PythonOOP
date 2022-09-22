@@ -8,7 +8,7 @@
 <body>
     <h2>The Bill Form</h2>
     <p>Fill in the form and click the button to get the result</p>
-    <form action="/results" method="post">
+    <form action="/bill_form" method="post">
         {{ billform.amount.label }} {{ billform.amount }}
         <br/>
         {{ billform.period.label }} {{ billform.period }}
@@ -24,8 +24,13 @@
         {{ billform.days_in_house2.label }} {{ billform.days_in_house2 }}
         <hr/>
         {{ billform.button }}
-
-
+        <br/>
+        {% if result %}
+        <hr/>
+        {{ name1 }} pays {{ amount1 }}
+        <br/>
+        {{ name2 }} pays {{ amount2 }}
+        {% endif %}
     </form>
 </body>
 </html>
