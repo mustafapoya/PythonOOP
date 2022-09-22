@@ -42,5 +42,5 @@ class PdfReport:
 
         pdf.output(f"files/{self.filename}")
         # change directory to files and open the file
-        os.chdir("files")
+        os.chdir("../files")
         webbrowser.open(self.filename)
