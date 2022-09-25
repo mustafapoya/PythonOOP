@@ -1,12 +1,19 @@
 import justpy as jp
 
+from instant_dictionary_web.webapp import layout
+from instant_dictionary_web.webapp import Page
 
-class About:
+
+class About(Page):
     path = "/about"
 
     def serve(self):
         wp = jp.QuasarPage(tailwind=True)
-        div = jp.Div(a=wp, classes="bg-gray-200 h-screen")
+
+        lay = layout.DefaultLayout(a=wp)
+        container = jp.QPageContainer(a=lay)
+
+        div = jp.Div(a=container, classes="bg-gray-200 h-screen")
         jp.Div(a=div, text="This is the About page!", classes="text-4xl m-2")
         jp.Div(a=div, text="""
             Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
