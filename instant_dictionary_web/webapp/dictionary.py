@@ -3,7 +3,7 @@ import justpy as jp
 from instant_dictionary_web import definition
 from instant_dictionary_web.webapp import layout
 from instant_dictionary_web.webapp import Page
-
+import requests
 
 class Dictionary(Page):
     path = "/dictionary"
@@ -38,6 +38,8 @@ class Dictionary(Page):
 
     @staticmethod
     def get_definition(widget, msg):
-        defined = definition.Definition(widget.value).get()
-        widget.outputdiv.text = " ".join(defined)
+        # defined = definition.Definition(widget.value).get()
 
+        req = requests.get(f"http://localhost:8001/api?w={widget.value}")
+        data = req.json()
+        widget.outputdiv.text = " ".join(data['definition'])
