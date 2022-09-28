@@ -139,4 +139,3 @@ if __name__ == "__main__":
     card = Card(type=card_type, number=card_number, cvc=card_cvc, holder=card_holder)
 
     print(user.buy(seat=seat, card=card))
-    
